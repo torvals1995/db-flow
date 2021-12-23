@@ -6,14 +6,21 @@
     "db-flow": "./bin/cli"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "rollup -c -w"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "cac": "^6.7.12",
+    "chalk": "^5.0.0",
     "koa": "^2.13.4",
-    "koa-send": "^5.0.1"
+    "koa-router": "^10.1.1",
+    "koa-send": "^5.0.1",
+    "koa2-cors": "^2.0.6",
+    "tv4": "^1.3.0"
+  },
+  "devDependencies": {
+    "rollup": "^2.61.1"
   }
 }

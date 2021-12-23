@@ -1,0 +1,23 @@
+// 创建项目
+.create-proj{
+  height: calc(100vh - 64px);
+  background: #eff0f3;
+  padding: 60px 400px 0px;
+  & > .create{
+    padding: 30px 48px 24px;
+    background: rgb(230,235,242);
+    border-radius: 12px;
+    & > .create-header{
+      background: rgb(255, 255, 255);
+      padding: 10px 20px 5px;
+    }
+    & > .create-content{
+      margin: 20px 0px;
+      box-shadow: rgb(0 0 0 / 10%) 0px 6px 20px -6px;
+      padding: 20px;
+      background: rgb(255, 255, 255);
+    }
+  }
+
+
+}

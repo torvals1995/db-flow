@@ -1,0 +1,27 @@
+.header{
+  height: 64px;
+  background: #fff;
+  padding: 0 50px;
+  border-bottom: 1px solid rgb(216, 214, 214);
+  & .logo{
+    float: left;
+    width: 240px;
+    height: 31px;
+    margin: 16px 24px 16px 0;
+    background: rgba(145, 141, 141, 0.3);
+  }
+  // 标题菜单
+  & .header-menu{
+    display: flex;
+    height: 100%;
+    align-items: center;
+    & .menu-item{
+      color: black;
+      font-size: 16px;
+      margin-left: 64px;
+      &:hover{
+        color: #2d7ada;
+      }
+    }
+  }
+}
