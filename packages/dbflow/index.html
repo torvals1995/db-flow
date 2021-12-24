@@ -1,12 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <title>Document</title>
 </head>
+
 <body>
   123456
+  <script>
+    const params = {
+      projName: "codeShop",
+      projDesc: "codeShop",
+      host: "119.45.223.71",
+      path: "/home/",
+      deployOrder: "npm shell",
+      codeRepo: "git@gitee.com:torvals/code-shop.git"
+    }
+    axios.post('/api/project', params)
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    // axios.get('/api/project')
+    //   .then(function (response) {
+    //     console.log(response);
+    //   })
+    //   .catch(function (error) {
+    //     console.log(error);
+    //   });
+  </script>
 </body>
+
 </html>

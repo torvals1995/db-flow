@@ -51,7 +51,7 @@ export default function CreateProj() {
   // form表单操作
   const onFinish = async (values) => {
     // console.log('Success:', values);
-    
+
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -68,6 +68,7 @@ export default function CreateProj() {
   //     "deployOrder": "npm shell",
   //     "repoCode": "git@gitee.com:torvals/code-shop.git"
   // }
+
   return (
     <div className="create-proj">
       <div className="create">

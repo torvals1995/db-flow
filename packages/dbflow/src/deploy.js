@@ -1,7 +1,7 @@
 import tv4 from 'tv4';
 import chalk from 'chalk';
-import { castArray } from './uitls';
-import spawn from './spawn';
+import { castArray } from './utils/index';
+import spawn from './utils/spawn';
 // import { cloneDeep as esCloneDeep } from 'lodash-es';
 const schema = {
   type: 'object',
