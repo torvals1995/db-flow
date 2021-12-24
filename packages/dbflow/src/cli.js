@@ -6,21 +6,20 @@ cli
   .command('[root]') // default command
   .alias('deploy')
   .option('--port <port>', `[number] specify port`)
-  .action((root, options) => {
-    console.log('rollup 开始');
-    // const { createServer } = require('./server');
+  .action(async (root, options) => {
+    const { createServer } = await import('./server')
 
-    // try {
-    //   const server = createServer();
-    //   server.listen(3001);
-    // } catch (e) {
-    //   createLogger(options.logLevel).error(
-    //     chalk.red(`error when starting dev server:\n${e.stack}`),
-    //     { error: e }
-    //   )
-    //   process.exit(1)
+    try {
+      const server = createServer();
+      server.listen(3001);
+    } catch (e) {
+      createLogger(options.logLevel).error(
+        chalk.red(`error when starting dev server:\n${e.stack}`),
+        { error: e }
+      )
+      process.exit(1)
       
-    // };
+    };
   });
 
 cli.parse();

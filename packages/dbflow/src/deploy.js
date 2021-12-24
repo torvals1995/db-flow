@@ -1,4 +1,8 @@
-const tv4 = require('tv4');
+import tv4 from 'tv4';
+import chalk from 'chalk';
+import { castArray } from './uitls';
+import spawn from './spawn';
+// import { cloneDeep as esCloneDeep } from 'lodash-es';
 const schema = {
   type: 'object',
   properties: {
@@ -22,15 +26,33 @@ const schema = {
   required: ['host', 'repo', 'path', 'ref'],
 };
 
-function startDeploy(options, cb) {
+export function startDeploy(env, envConfig, cb) {
   const result = tv4.validateResult(envConfig, schema);
   if (!result.valid) {
     return cb(result.error);
   } else {
-    console.log('没问题');
+    console.log(chalk.green('结构没问题'));
   }
-}
+  process.env.NODE_ENV = "production"
+  if (process.env.NODE_ENV !== 'test') {
+    console.log(chalk.yellow(`--> Deploying to ${env} environment`));
+  }
+  // const hosts = castArray(envConfig.host);
+  spawn(envConfig)
+  // const jobs = hosts.map(function (host) {
+  //   return function job(done) {
+  //     if (process.env.NODE_ENV !== 'test') {
+  //       console.log('--> on host %s', host.host ? host.host : host);
+  //     }
+  //     const config = esCloneDeep(envConfig);
+  //     config.host = host;
+  //     console.log('config: ', config);
+  //     // Utils.spawn(config, args, done);
+  //   };
+  // });
+  // series(jobs, function (err, result) {
 
-module.exports = {
-  startDeploy
+  //   // result = Array.isArray(envConfig.host) ? result : result[0];
+  //   // cb(err, result);
+  // });
 }
