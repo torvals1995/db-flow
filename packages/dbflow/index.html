@@ -10,17 +10,19 @@
 </head>
 
 <body>
-  123456
   <script>
     const params = {
+      env: "production",
       projName: "codeShop",
       projDesc: "codeShop",
       host: "119.45.223.71",
-      path: "/home/",
+      // host: "",
+      path: "/home/repo/codeshop",
       deployOrder: "npm shell",
-      codeRepo: "git@gitee.com:torvals/code-shop.git"
-    }
-    axios.post('/api/project', params)
+      codeRepo: "git@gitee.com:torvals/code-shop.git",
+      ref: 'origin/master'
+    };
+    axios.post('/action/deploy', params)
       .then(function (response) {
         console.log(response);
       })

@@ -30,8 +30,7 @@ export default {
     return axiosInstance.get(url, config);
   },
   postJson(url, data = {}, config = defaultAxiosConfig) {
-    const paltformData = objAddUacPlatform(data);
-    data = filterPostJsonData(paltformData);
+    data = filterPostJsonData(data);
     return axiosInstance.post(url, data, {
       headers: {
         'Content-Type': 'application/json; charset=utf-8',
@@ -40,13 +39,28 @@ export default {
     });
   },
   post(url, data = {}, config = defaultAxiosConfig) {
-    return axiosInstance.post(url, objectToFormData(data), config);
+    return axiosInstance.post(url, data, config);
+  },
+  // post(url, data = {}, config = defaultAxiosConfig) {
+  //   return axiosInstance.post(url, objectToFormData(data), config);
+  // },
+  put(url, data = {}, config = defaultAxiosConfig) {
+    return axiosInstance.put(url, data, config);
+  },
+  delete(url, params = {}, config = defaultAxiosConfig) {
+    // const _params = {
+    //   t: new Date().getTime(),
+    //   ...formatValue(params),
+    // };
+
+    // config.params = configParams;
+    return axiosInstance.delete(url, config);
   },
 };
 function filterPostJsonData(data = {}) {
   const result = {};
   Object.entries(data).forEach(([key, value]) => {
-    if (!isNull(data[key] && !isUndefined(data[key]))) {
+    if (!data[key]) {
       result[key] = value;
     }
   });
@@ -63,4 +77,24 @@ function objectToFormData(obj = {}) {
   });
 
   return formData;
+}
+
+function formatValue(obj = {}) {
+  const result = {};
+  Object.entries(obj).forEach(([key, value]) => {
+    let val = value;
+    if (!value) {
+      return;
+    }
+
+    if (typeof value === 'object') {
+      if (value instanceof File) {
+        val = value;
+      } else {
+        val = JSON.stringify(value);
+      }
+    }
+    result[key] = val;
+  });
+  return result;
 }

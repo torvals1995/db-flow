@@ -2,23 +2,30 @@
 const Router = require('koa-router');
 const router = new Router();
 import { startDeploy } from '../deploy';
-import { list, init, create } from './api';
-// , get, create, update, del
+import {
+  init,
+  create,
+  list,
+  get,
+  update,
+  del,
+} from './api';
 
 
 // /api/user/ get方法
 router
-  .get('/api/:list', init, list)
   .post('/api/:list', init, create)
-// router.get('/api/:list/:id', init, get);
-// router.put('/api/:list/:id', init, update);
-// router.delete('/api/:list/:id', init, del);
+  .get('/api/:list', init, list)
+  .get('/api/:list/:id', init, get)
+  .put('/api/:list/:id', init, update)
+  .delete('/api/:list/:id', init, del)
 
 router
-  .post("/api/deploy", async (ctx) => {
-    // todo：用tv4校验
-    
-    // startDeploy();
+  .post("/action/deploy", async (ctx) => {
+    // ctx.body = '123456';
+    const envOptions = ctx.request.body;
+    ctx.body = '123456';
+    startDeploy(envOptions);
     // const env = 'production';
     // startDeploy(env, production, (err, data) => {
     //   if (err) {

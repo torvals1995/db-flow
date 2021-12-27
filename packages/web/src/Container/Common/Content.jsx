@@ -1,9 +1,9 @@
 import React from 'react'
 import './style/Content.scss';
-export default function Content() {
+export default function Content(props) {
   return (
     <div className="content">
-      123
+      {props.children}
     </div>
   )
 }

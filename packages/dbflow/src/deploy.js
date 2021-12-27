@@ -6,6 +6,8 @@ import spawn from './utils/spawn';
 const schema = {
   type: 'object',
   properties: {
+    // 环境变量
+    env: { type: 'string' },
     // 项目名，新建
     projName: { type: 'string' },
     // 项目描述，新建、可选
@@ -13,29 +15,30 @@ const schema = {
     // 部署ip地址，新建
     host: { type: ['string', 'array'] },
     // 代码仓库，新建
-    repo: { type: 'string' },
+    codeRepo: { type: 'string' },
     // 代码分支，执行部署的时候使用
     ref: { type: 'string' },
     // 部署目录，新建
     path: { type: 'string' },
     // 部署指令，新建
-    'post-deploy': { type: 'string' },
-    // 用户：使用插件来支持
-    // user: { type: 'string', minLength: 1 },
+    deployOrder: { type: 'string' },
   },
-  required: ['host', 'repo', 'path', 'ref'],
+  required: ['env', 'host', 'codeRepo', 'path', 'ref', 'deployOrder'],
 };
 
-export function startDeploy(env, envConfig, cb) {
+export function startDeploy(envConfig) {
   const result = tv4.validateResult(envConfig, schema);
+  envConfig.user = "root";
   if (!result.valid) {
-    return cb(result.error);
+    console.log(chalk.red('Deploy failed'));
+    console.log(chalk.red(result.error));
+    return;
   } else {
-    console.log(chalk.green('结构没问题'));
+    console.log(chalk.green('Deploy format validate'));
   }
   process.env.NODE_ENV = "production"
   if (process.env.NODE_ENV !== 'test') {
-    console.log(chalk.yellow(`--> Deploying to ${env} environment`));
+    console.log(chalk.yellow(`--> Deploying to ${envConfig.env} environment`));
   }
   // const hosts = castArray(envConfig.host);
   spawn(envConfig)

@@ -1,11 +1,13 @@
-export const successReturn = {
-  code: 0,
-  msg: 'success',
+export function successReturn(reason, data = {}) {
+  return {
+    code: 0,
+    msg: reason,
+    data,
+  }
 }
 export function failReturn(reason) {
   return {
     code: -1,
-    msg: 'success',
-    reason
+    msg: reason,
   }
 }

@@ -3,6 +3,8 @@ import { Collapse, Steps, Form, Input, Button, Space, Radio } from 'antd';
 import './index.scss';
 import keyMirror from 'keymirror';
 import { useHistory } from 'react-router';
+import request from '../../utils/request';
+import api from '../../api/project';
 const { Step } = Steps;
 const { Panel } = Collapse;
 const { TextArea } = Input;
@@ -10,6 +12,7 @@ const repoState = keyMirror({
   online: null, // 独立仓库
   subPath: null, // 子目录仓库
 })
+
 export default function CreateProj() {
   const [radioValue, setRadioValue] = useState(repoState.online);
   const history = useHistory();
@@ -19,7 +22,7 @@ export default function CreateProj() {
         <React.Fragment>
           <Form.Item
             label="代码仓库"
-            name='repoCode'
+            name='codeRepo'
             rules={[
               {
                 required: true,
@@ -50,8 +53,9 @@ export default function CreateProj() {
 
   // form表单操作
   const onFinish = async (values) => {
-    // console.log('Success:', values);
-
+    const res = await request.post(api.project, values);
+    console.log(res);
+    if(res?.code === 0) history.push('/');
   };
 
   const onFinishFailed = (errorInfo) => {
