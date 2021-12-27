@@ -8,7 +8,16 @@
   "scripts": {
     "start": "rollup -c -w"
   },
-  "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/torvals1995/db-flow"
+  },
+  "keywords": [
+    "git",
+    "deploy",
+    "nginx",
+    "mongodb"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {
